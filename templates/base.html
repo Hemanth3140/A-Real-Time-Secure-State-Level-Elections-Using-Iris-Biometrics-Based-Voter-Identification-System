@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Voter System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" class="navbar-brand"><i class="fas fa-eye"></i> IrisVote</a>
+            <div class="nav-links">
+                {% if session.user_id %}
+                    {% if session.role == 'Admin' %}
+                        <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="{{ url_for('upload_party') }}"><i class="fas fa-flag"></i> Parties</a>
+                        <a href="{{ url_for('upload_dataset') }}"><i class="fas fa-database"></i> Dataset</a>
+                        <a href="{{ url_for('train_model') }}"><i class="fas fa-brain"></i> Train</a>
+                        <a href="{{ url_for('performance_reports') }}"><i class="fas fa-chart-line"></i> Reports</a>
+                        <a href="{{ url_for('view_voting_results') }}"><i class="fas fa-poll"></i> Results</a>
+                    {% else %}
+                        <a href="{{ url_for('user_dashboard') }}"><i class="fas fa-user"></i> Dashboard</a>
+                        <a href="{{ url_for('view_parties') }}"><i class="fas fa-list"></i> Parties</a>
+                        <a href="{{ url_for('vote') }}"><i class="fas fa-check-circle"></i> Vote</a>
+                        <a href="{{ url_for('user_results') }}"><i class="fas fa-poll"></i> Results</a>
+                        <a href="{{ url_for('user_logs') }}"><i class="fas fa-clipboard-list"></i> Logs</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout') }}" class="btn-danger" style="margin-left: 15px; padding: 5px 10px;">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+        <footer>
+            <p>&copy; 2026 Secure Iris Elections. All Rights Reserved.</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

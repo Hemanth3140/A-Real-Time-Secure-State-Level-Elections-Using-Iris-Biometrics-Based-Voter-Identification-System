@@ -1,0 +1,10 @@
+flask
+numpy
+opencv-python
+matplotlib
+scikit-image
+tensorflow
+keras
+scikit-learn
+Pillow
+werkzeug

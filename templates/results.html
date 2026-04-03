@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{{ title }}</h2>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="card" style="flex: 1;">
+            <h3>Vote Counts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Party</th>
+                        <th>Votes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        <td style="display: flex; align-items: center;">
+                            <img src="{{ url_for('static', filename='uploads/parties/' + row.symbol_path) }}"
+                                class="party-symbol" style="width: 40px; height: 40px; margin-right: 10px;">
+                            {{ row.name }}
+                        </td>
+                        <td>{{ row.vote_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    {% if results %}
+    const labels = [{% for row in results %}"{{ row.name }}", {% endfor %}];
+    const data = [{% for row in results %}{ { row.vote_count } }, {% endfor %}];
+    document.addEventListener('DOMContentLoaded', function () {
+        renderResultsChart(labels, data);
+    });
+    {% endif %}
+</script>
+{% endblock %}
+
+{% endblock %}

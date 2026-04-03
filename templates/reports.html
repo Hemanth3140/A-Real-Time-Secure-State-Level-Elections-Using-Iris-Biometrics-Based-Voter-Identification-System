@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Performance Reports</h2>
+    </div>
+    <div style="height: 400px; width: 100%;">
+        <canvas id="trainingChart"></canvas>
+    </div>
+
+    {% if history %}
+    <div style="margin-top: 20px;">
+        <h3>Metrics</h3>
+        <p><strong>Final Accuracy:</strong> {{ "%.2f"|format(history['accuracy'][-1] * 100) }}%</p>
+        <p><strong>Final Loss:</strong> {{ "%.4f"|format(history['loss'][-1]) }}</p>
+    </div>
+    {% else %}
+    <p>No training history available.</p>
+    {% endif %}
+</div>
+
+{% block scripts %}
+<script>
+    {% if history %}
+    const accuracy = {{ history['accuracy'] | tojson }};
+    const loss = {{ history['loss'] | tojson }};
+    document.addEventListener('DOMContentLoaded', function () {
+        renderTrainingChart(accuracy, loss);
+    });
+    {% endif %}
+</script>
+{% endblock %}
+
+{% endblock %}

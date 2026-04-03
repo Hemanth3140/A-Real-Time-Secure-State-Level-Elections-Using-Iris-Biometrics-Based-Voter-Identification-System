@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>Upload Iris Dataset</h2>
+    </div>
+    <form method="POST">
+        <div class="alert">
+            <i class="fas fa-info-circle"></i> The system uses the 'model/' directory for training data by default. You
+            can specify a path here if needed.
+        </div>
+        <div class="form-group">
+            <label>Dataset Folder Path (Server Side)</label>
+            <input type="text" name="dataset_path" placeholder="e.g. C:/Datasets/Iris or leave blank for default">
+        </div>
+        <button type="submit" class="btn btn-primary">Set Dataset Path</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+{% endblock %}

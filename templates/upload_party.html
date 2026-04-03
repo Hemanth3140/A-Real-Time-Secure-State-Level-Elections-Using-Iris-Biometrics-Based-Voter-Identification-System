@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h2>Upload Election Party Details</h2>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Party Name</label>
+            <input type="text" name="name" required placeholder="Party Name">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Short manifesto or description">
+        </div>
+        <div class="form-group">
+            <label>Party Symbol (Image)</label>
+            <input type="file" name="image" required accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Party</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

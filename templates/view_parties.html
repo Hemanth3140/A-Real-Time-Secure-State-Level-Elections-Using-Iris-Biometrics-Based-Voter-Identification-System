@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Registered Political Parties</h2>
+    </div>
+    <div class="dashboard-grid">
+        {% for party in parties %}
+        <div class="card" style="text-align: center;">
+            <img src="{{ url_for('static', filename='uploads/parties/' + party.symbol_path) }}" class="party-symbol"
+                style="width: 100px; height: 100px;">
+            <h3>{{ party.name }}</h3>
+            <p>{{ party.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('vote') }}" class="btn btn-primary">Proceed to Vote</a>
+    </div>
+</div>
+{% endblock %}

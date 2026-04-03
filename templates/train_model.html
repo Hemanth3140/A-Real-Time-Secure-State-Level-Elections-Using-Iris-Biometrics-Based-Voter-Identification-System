@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Train CNN Model</h2>
+    </div>
+
+    <div style="text-align: center; padding: 20px;">
+        <i class="fas fa-brain fa-4x" style="color: #a29bfe; margin-bottom: 20px;"></i>
+        <p>Click below to generate and train the Convolutional Neural Network (CNN) based on the uploaded iris dataset.
+        </p>
+
+        <form method="POST">
+            <button type="submit" class="btn btn-primary btn-lg">Start Training</button>
+        </form>
+    </div>
+
+    {% if result %}
+    <div class="alert" style="margin-top: 20px; text-align: center;">
+        <h3>{{ result }}</h3>
+    </div>
+    {% endif %}
+
+    {% if accuracy %}
+    <div class="card" style="margin-top: 20px; background: rgba(0, 200, 0, 0.1);">
+        <h3 style="text-align: center;">Current Model Accuracy: {{ "%.2f"|format(accuracy) }}%</h3>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

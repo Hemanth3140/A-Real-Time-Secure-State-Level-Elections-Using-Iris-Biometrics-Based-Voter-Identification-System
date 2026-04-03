@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 40px auto;">
+    <div class="card-header" style="text-align: center;">
+        <i class="fas fa-lock fa-2x"></i>
+        <h2>Login</h2>
+    </div>
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px;">
+        New Voter? <a href="{{ url_for('register') }}" style="color: #acf;">Register Here</a>
+    </p>
+</div>
+{% endblock %}

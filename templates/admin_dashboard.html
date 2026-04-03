@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Admin Dashboard - System Overview</h2>
+    </div>
+    <div class="dashboard-grid">
+        <div class="card" style="background: rgba(255, 118, 117, 0.2);">
+            <h3><i class="fas fa-flag"></i> Election Parties</h3>
+            <p>Manage political parties, upload symbols.</p>
+            <a href="{{ url_for('upload_party') }}" class="btn btn-secondary">Manage</a>
+        </div>
+        <div class="card" style="background: rgba(0, 206, 201, 0.2);">
+            <h3><i class="fas fa-database"></i> Iris Dataset</h3>
+            <p>Upload and manage iris image dataset for training.</p>
+            <a href="{{ url_for('upload_dataset') }}" class="btn btn-secondary">Upload</a>
+        </div>
+        <div class="card" style="background: rgba(162, 155, 254, 0.2);">
+            <h3><i class="fas fa-brain"></i> Model Training</h3>
+            <p>Train CNN model for iris recognition.</p>
+            <a href="{{ url_for('train_model') }}" class="btn btn-secondary">Train</a>
+        </div>
+        <div class="card" style="background: rgba(253, 203, 110, 0.2);">
+            <h3><i class="fas fa-chart-pie"></i> Reports & Results</h3>
+            <p>View accuracy graphs and election results.</p>
+            <a href="{{ url_for('performance_reports') }}" class="btn btn-secondary">Reports</a>
+            <a href="{{ url_for('view_voting_results') }}" class="btn btn-secondary">Results</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

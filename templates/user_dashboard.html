@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>User Dashboard</h2>
+    </div>
+    <div style="display: flex; gap: 20px; align-items: start;">
+        <div style="flex: 1;">
+            <h3>Welcome, {{ user.name }}</h3>
+            <table style="width: 100%; margin-bottom: 20px;">
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ user.address }}</td>
+                </tr>
+                <tr>
+                    <th>Aadhaar ID</th>
+                    <td>{{ user.aadhaar_id }}</td>
+                </tr>
+                <tr>
+                    <th>Voting Status</th>
+                    <td>
+                        {% if user.has_voted %}
+                        <span style="color: #55efc4; font-weight: bold;"><i class="fas fa-check-circle"></i>
+                            Voted</span>
+                        {% else %}
+                        <span style="color: #ff7675; font-weight: bold;"><i class="fas fa-times-circle"></i> Not
+                            Voted</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="flex: 1; text-align: center;">
+            <div class="card" style="background: rgba(255, 255, 255, 0.1);">
+                <h3><i class="fas fa-vote-yea fa-2x"></i></h3>
+                <h3>Cast Your Vote</h3>
+                <p>Use secure Iris Recognition to cast your vote.</p>
+                {% if not user.has_voted %}
+                <a href="{{ url_for('vote') }}" class="btn btn-primary btn-lg">Go to Voting Booth</a>
+                {% else %}
+                <button class="btn btn-secondary" disabled>Already Voted</button>
+                <br><br>
+                <a href="{{ url_for('user_results') }}" class="btn btn-primary">View Results</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
